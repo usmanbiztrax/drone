@@ -7,8 +7,8 @@
     <meta name="description" content="Discover Biztrax's AI Drone System: autonomous aerial solutions for security, surveillance, infrastructure inspection, and more. Advanced AI for hands-free operations.">
     <meta name="keywords" content="AI Drone, Autonomous Drone, Drone Surveillance, Infrastructure Inspection, Wildlife Monitoring, Disaster Management, Border Patrol, AI Object Recognition, Self-Charging Drone, Biztrax Solutions">
     
-    <!-- Google Fonts: Inter (default Tailwind font) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter (default Tailwind font) & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     
     <!-- Material Icons CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -34,9 +34,8 @@
                         'md-4': '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
                     },
                     spacing: {
-                        '130px': '130px', /* Custom padding for header height */
-                        '100px': '100px',
-                        '80px': '80px',
+                        '80px': '80px', /* Custom padding for mobile header height (logo + nav) */
+                        '60px': '60px',  /* Custom padding for desktop header height (single line) */
                     }
                 }
             }
@@ -62,39 +61,52 @@
             font-feature-settings: 'liga';
         }
 
-        /* Base body padding for sticky header */
+        /* Base body padding for sticky header - adjusted for minimal design */
         body {
-            padding-top: 130px; /* Default for mobile */
+            padding-top: 80px; /* Default for mobile (logo + nav) */
         }
 
         /* Responsive padding-top for body */
-        @media (min-width: 481px) {
-            body {
-                padding-top: 100px;
-            }
-        }
         @media (min-width: 769px) {
             body {
-                padding-top: 80px;
+                padding-top: 60px; /* For desktops (compact single line) */
             }
+        }
+
+        /* Header scroll effect (Material Design elevation and size change) */
+        .header-scrolled {
+            padding-top: 0.5rem !important; /* py-2 */
+            padding-bottom: 0.5rem !important; /* py-2 */
+            box-shadow: theme('boxShadow.md-4') !important; /* More prominent shadow when scrolled */
+        }
+        .header-scrolled .logo {
+            width: 5rem !important; /* w-20 */
+        }
+        /* Tagline class removed, so no need for tagline specific scroll styling */
+
+        /* Parallax effect styles */
+        .parallax-element {
+            will-change: transform; /* Optimize for animation */
+            transition: transform 0.1s linear; /* Smooth parallax movement */
         }
     </style>
 </head>
 <body class="font-inter text-text-dark leading-relaxed bg-bg-light overflow-x-hidden">
 
-    <header class="bg-surface-white text-text-dark p-4 text-center shadow-md-2 flex flex-col items-center justify-center sticky top-0 z-50 w-full transition-all duration-300 ease-in-out">
-        <div class="flex flex-col items-center mb-2 md:flex-row md:mb-0 md:gap-4">
+    <header class="bg-surface-white text-text-dark py-4 px-4 text-center shadow-md-2 flex flex-col items-center justify-center sticky top-0 z-50 w-full transition-all duration-300 ease-in-out
+                   md:flex-row md:justify-between md:py-3 md:px-6">
+        <div class="flex flex-col items-center md:flex-row md:gap-3">
             <!-- Biztrax Logo -->
-            <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="w-32 h-auto rounded-md transition-all duration-300 ease-in-out md:w-24">
-            <p class="text-primary-blue text-sm opacity-90 mt-1 md:mt-0 md:text-xs transition-all duration-300 ease-in-out">Cutting-Edge IT Consultancy & Autonomous Solutions</p>
+            <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="logo w-28 h-auto rounded-md transition-all duration-300 ease-in-out md:w-20">
+            <!-- Removed tagline: <p class="tagline text-primary-blue text-sm opacity-90 mt-1 md:mt-0 md:text-xs transition-all duration-300 ease-in-out">Cutting-Edge IT Consultancy & Autonomous Solutions</p> -->
         </div>
-        <nav class="w-full text-center mt-2">
-            <ul class="list-none p-0 m-0 flex flex-wrap justify-center gap-4">
-                <li><a href="#overview" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Overview</a></li>
-                <li><a href="#features" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Features</a></li>
-                <li><a href="#use-cases" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Use Cases</a></li>
-                <li><a href="#future-plans" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Future Plans</a></li>
-                <li><a href="#contact" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Contact</a></li>
+        <nav class="w-full text-center mt-2 md:w-auto md:mt-0">
+            <ul class="list-none p-0 m-0 flex flex-wrap justify-center gap-3 md:gap-4">
+                <li><a href="#overview" class="block text-text-dark font-medium px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300 text-sm">Overview</a></li>
+                <li><a href="#features" class="block text-text-dark font-medium px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300 text-sm">Features</a></li>
+                <li><a href="#use-cases" class="block text-text-dark font-medium px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300 text-sm">Use Cases</a></li>
+                <li><a href="#future-plans" class="block text-text-dark font-medium px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300 text-sm">Future Plans</a></li>
+                <li><a href="#contact" class="block text-text-dark font-medium px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300 text-sm">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -111,13 +123,13 @@
 
         <section id="overview" class="bg-surface-white p-10 mb-8 rounded-lg shadow-md-1 hover:shadow-md-2 transition-shadow duration-300">
             <h2 class="font-montserrat text-dark-blue text-4xl font-bold text-center mb-8">System Overview</h2>
-            <div class="image-container w-full h-96 overflow-hidden rounded-lg mb-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+            <div class="image-container w-full h-96 overflow-hidden rounded-lg mb-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.2">
                 <!-- AI Image: A sleek, futuristic drone with multiple propellers flying autonomously over a city skyline at dawn, with subtle glowing AI elements. -->
                 <img src="AI_Drone_Skyline_Dawn.webp" alt="AI Drone System Flying Over City" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+System+Image';">
                 <!-- Prompt for image generation if not provided: "Generate a realistic, high-resolution image of a sleek, futuristic autonomous drone with subtle glowing AI indicators, flying gracefully over a modern city skyline at dawn. The drone should look advanced and capable, perhaps with a camera lens visible." -->
             </div>
             <p class="text-lg text-gray-700">The Biztrax AI Drone System is a fully autonomous aerial platform designed for intelligent, hands-free operation. It conducts missions without human intervention and features a self-charging mechanism using a custom-built landing box. When the battery is low, the drone automatically lands, recharges, and prepares for its next mission. This system pushes the boundaries of autonomous technology, offering significant potential across public safety, defense, logistics, and environmental monitoring.</p>
-            <div class="video-container w-full h-96 overflow-hidden rounded-lg mt-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+            <div class="video-container w-full h-96 overflow-hidden rounded-lg mt-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.15">
                 <!-- AI Video: A short clip showing the AI Drone autonomously landing into its charging station, then taking off again. Focus on the precision and automation. -->
                 <video controls autoplay muted loop class="w-full h-full object-cover block">
                     <source src="AI_Drone_Charging_Takeoff.mp4" type="video/mp4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+Charging+Video+Unavailable';">
@@ -132,7 +144,7 @@
             <div class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
                     <span class="material-icons text-primary-blue text-6xl mb-4">flight_takeoff</span>
-                    <h3 class="font-montserrat text-dark-blue text-2xl font-bold mb-2">Auto Take-off & Landing</h3>
+                    <h3>Auto Take-off & Landing</h3>
                     <p class="text-gray-700 text-base flex-grow">Effortless and precise automated take-off and landing sequences for seamless operation.</p>
                 </div>
                 <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
@@ -170,47 +182,47 @@
                     <span class="material-icons text-primary-blue text-6xl mb-4">security</span>
                     <h3>Security & Surveillance</h3>
                     <p class="text-gray-700 text-base flex-grow">Automated patrolling and real-time monitoring for enhanced perimeter security and asset protection.</p>
-                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.05">
                         <!-- AI Image: Drone hovering over a secure facility, showing a wide surveillance view. -->
                         <img src="Drone_Security_Surveillance.webp" alt="Drone for Security" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Security+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of a drone with surveillance cameras hovering discreetly over a modern, secure industrial facility, showing a wide-angle view from the drone's perspective on a screen. Emphasize security and monitoring." -->
                     </div>
                 </div>
                 <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
-                    <span class="material-icons text-primary-blue text-6xl mb-4">forest</span>
+                    <span class="material-icons">forest</span>
                     <h3>Wildlife Protection & Monitoring</h3>
                     <p class="text-gray-700 text-base flex-grow">Non-invasive observation and data collection for wildlife conservation and ecological research.</p>
-                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.07">
                         <!-- AI Image: Drone flying over a lush forest or wildlife reserve, observing animals from above. -->
                         <img src="Drone_Wildlife_Monitoring.webp" alt="Drone for Wildlife" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Wildlife+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone flying over a vibrant, dense forest or wildlife reserve, subtly observing a group of animals (e.g., elephants, deer) from above. The scene should convey ecological monitoring and conservation." -->
                     </div>
                 </div>
                 <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
-                    <span class="material-icons text-primary-blue text-6xl mb-4">crisis_alert</span>
+                    <span class="material-icons">crisis_alert</span>
                     <h3>Disaster Management & Search-and-Rescue</h3>
                     <p class="text-gray-700 text-base flex-grow">Rapid deployment for damage assessment, search operations, and critical information gathering in disaster zones.</p>
-                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.06">
                         <!-- AI Image: Drone flying through a disaster-stricken area, perhaps with emergency services vehicles below. -->
                         <img src="Drone_Disaster_Rescue.webp" alt="Drone for Disaster Management" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Disaster+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone flying low over a disaster-stricken area (e.g., flood, earthquake aftermath), with emergency response vehicles and personnel visible below. The drone should appear to be actively mapping or searching, conveying a sense of urgency and aid." -->
                     </div>
                 </div>
                 <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
-                    <span class="material-icons text-primary-blue text-6xl mb-4">construction</span>
+                    <span class="material-icons">construction</span>
                     <h3>Infrastructure Inspection</h3>
                     <p class="text-gray-700 text-base flex-grow">Efficient and safe inspection of critical infrastructure like bridges, power lines, and pipelines.</p>
-                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.08">
                         <!-- AI Image: Drone inspecting a large bridge or wind turbine up close. -->
                         <img src="Drone_Infrastructure_Inspection.webp" alt="Drone for Infrastructure" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Infrastructure+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone conducting a detailed inspection of a large infrastructure element, such as a bridge underbelly or a wind turbine blade. The drone should be in close proximity, highlighting precision inspection capabilities." -->
                     </div>
                 </div>
                 <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
-                    <span class="material-icons text-primary-blue text-6xl mb-4">gpp_good</span>
+                    <span class="material-icons">gpp_good</span>
                     <h3>Border Patrol</h3>
                     <p class="text-gray-700 text-base flex-grow">Autonomous monitoring of borders for enhanced security and early detection of unauthorized crossings.</p>
-                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.07">
                         <!-- AI Image: Drone patrolling a remote border area. -->
                         <img src="Drone_Border_Patrol.webp" alt="Drone for Border Patrol" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Border+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone patrolling a remote, rugged border landscape, with subtle indications of a border fence or markers. The scene should convey long-range surveillance and security." -->
@@ -249,7 +261,7 @@
                     <p class="text-gray-700 text-base flex-grow">Developing advanced navigation for military and indoor environments where GPS is unavailable.</p>
                 </div>
             </div>
-            <div class="image-container w-full h-72 overflow-hidden rounded-lg mt-10 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
+            <div class="image-container w-full h-72 overflow-hidden rounded-lg mt-10 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1 parallax-element" data-speed="0.1">
                 <!-- AI Image: Conceptual image of multiple drones flying in a coordinated swarm formation for a complex task. -->
                 <img src="Swarm_Drones_Future.webp" alt="Future of Drone Swarms" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/cccccc/333333?text=Drone+Swarm+Future+Image';">
                 <!-- Prompt: "Generate a conceptual, high-resolution image of multiple advanced autonomous drones flying in a synchronized, coordinated swarm formation over a futuristic landscape or city. The image should convey teamwork and advanced AI capabilities, hinting at future applications like logistics or large-scale surveillance." -->
@@ -291,7 +303,7 @@
             });
         });
 
-        // Simple fade-in animation on scroll for sections
+        // Intersection Observer for fade-in animations
         const sections = document.querySelectorAll('section');
 
         const observerOptions = {
@@ -329,6 +341,35 @@
                 header.classList.remove('header-scrolled');
             }
         });
+
+        // Parallax effect for elements with data-speed attribute
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+
+        function updateParallax() {
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.dataset.speed);
+                const rect = element.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+
+                // Calculate element's center relative to viewport
+                const elementCenter = rect.top + rect.height / 2;
+                const viewportCenter = viewportHeight / 2;
+
+                // Calculate how far the element is from the viewport center
+                const distance = elementCenter - viewportCenter;
+
+                // Apply transform based on distance and speed
+                // The more positive the distance, the further down the element is from center
+                // We want to move it less as we scroll down (negative transform)
+                const translateY = -distance * speed;
+                element.style.transform = `translateY(${translateY}px)`;
+            });
+        }
+
+        // Initial parallax update and on scroll
+        window.addEventListener('scroll', updateParallax);
+        window.addEventListener('resize', updateParallax); // Recalculate on resize
+        updateParallax(); // Initial call to set positions
     </script>
 
 </body>
