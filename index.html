@@ -7,487 +7,119 @@
     <meta name="description" content="Discover Biztrax's AI Drone System: autonomous aerial solutions for security, surveillance, infrastructure inspection, and more. Advanced AI for hands-free operations.">
     <meta name="keywords" content="AI Drone, Autonomous Drone, Drone Surveillance, Infrastructure Inspection, Wildlife Monitoring, Disaster Management, Border Patrol, AI Object Recognition, Self-Charging Drone, Biztrax Solutions">
     
-    <!-- Google Fonts: Roboto (for body) and Montserrat (for headings) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter (default Tailwind font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Material Icons CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1976D2',
+                        'light-blue': '#64B5F6',
+                        'dark-blue': '#0D47A1',
+                        'accent-green': '#4CAF50',
+                        'text-dark': '#212121',
+                        'bg-light': '#F5F5F5',
+                        'surface-white': '#FFFFFF',
+                    },
+                    boxShadow: {
+                        'md-1': '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+                        'md-2': '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+                        'md-4': '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
+                    },
+                    spacing: {
+                        '130px': '130px', /* Custom padding for header height */
+                        '100px': '100px',
+                        '80px': '80px',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Material Design Inspired Color Palette (Default - please provide hex codes for exact brand colors) */
-        :root {
-            --md-primary-color: #1976D2; /* Deep Blue */
-            --md-primary-light: #64B5F6; /* Lighter Blue */
-            --md-primary-dark: #0D47A1; /* Darker Blue */
-            --md-accent-color: #4CAF50; /* Green Accent */
-            --md-text-on-dark: #FFFFFF;
-            --md-text-on-light: #212121; /* Dark Grey for text */
-            --md-background-light: #F5F5F5; /* Light Grey Background */
-            --md-surface-color: #FFFFFF; /* White for cards/surfaces */
-            --md-shadow-1dp: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --md-shadow-2dp: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-            --md-shadow-4dp: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-            color: var(--md-text-on-light);
-            line-height: 1.6;
-            background-color: var(--md-background-light);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            padding-top: 130px; /* Default padding for sticky header on small screens to accommodate logo + nav */
-        }
-
-        /* Global box-sizing */
-        *, *::before, *::after {
-          box-sizing: inherit;
-        }
-
-        /* Material Design Header (App Bar) */
-        header {
-            background-color: var(--md-surface-color); /* White background */
-            color: var(--md-text-on-light); /* Text color for visibility on white */
-            padding: 10px 20px; /* Adjusted padding for header */
-            text-align: center;
-            box-shadow: var(--md-shadow-2dp); /* Material Design elevation */
-            display: flex;
-            flex-direction: column; /* Stack logo/tagline and nav vertically on small screens */
-            align-items: center;
-            justify-content: center;
-            position: sticky; /* Make header sticky */
-            top: 0; /* Stick to the top */
-            z-index: 1000; /* Ensure it stays on top of other content */
-            width: 100%; /* Ensure it spans full width */
-            transition: padding 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for header changes */
-        }
-
-        header.header-scrolled {
-            padding: 5px 20px; /* Smaller padding when scrolled */
-            box-shadow: var(--md-shadow-4dp); /* More prominent shadow when scrolled */
-        }
-
-        header .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 10px; /* Space between logo/tagline and nav on mobile */
-        }
-
-        header .logo {
-            width: 120px; /* Default logo size */
-            height: auto;
-            border-radius: 4px; /* Slight rounding for the logo container if it's a square image */
-            transition: width 0.3s ease; /* Smooth transition for logo size */
-        }
-
-        header.header-scrolled .logo {
-            width: 100px; /* Smaller logo when scrolled */
-        }
-
-        header p {
-            font-size: 0.9em; /* Default tagline font size */
-            opacity: 0.9;
-            margin-top: 5px;
-            color: var(--md-primary-color); /* Tagline color to Biztrax logo blue */
-            transition: font-size 0.3s ease; /* Smooth transition for tagline size */
-        }
-
-        header.header-scrolled p {
-            font-size: 0.8em; /* Smaller tagline when scrolled */
-        }
-
-        /* Navigation Styling */
-        nav {
-            width: 100%;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-            justify-content: center;
-            gap: 15px; /* Space between nav items */
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--md-text-on-light);
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: block; /* Make the whole area clickable */
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(0, 0, 0, 0.08); /* Material Design hover effect */
-            color: var(--md-primary-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 10px; /* Default padding for container on small screens */
-        }
-
-        /* Material Design Card Styling for Sections */
-        section {
-            background-color: var(--md-surface-color);
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: var(--md-shadow-1dp); /* Subtle elevation */
-            transition: box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            box-shadow: var(--md-shadow-2dp); /* Lift on hover */
-        }
-
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--md-primary-dark);
-            text-align: center;
-            margin-bottom: 35px;
-            font-size: 2.2em;
-            font-weight: 700;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(to right, var(--md-primary-color), var(--md-primary-light));
-            color: var(--md-text-on-dark);
-            padding: 70px 20px;
-            border-radius: 8px;
-            box-shadow: var(--md-shadow-4dp); /* More prominent shadow for hero */
-        }
-
-        .hero-section h1 {
-            font-size: 3.8em;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .hero-section p {
-            font-size: 1.5em;
-            max-width: 900px;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        /* Material Design Button */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--md-accent-color);
-            color: var(--md-text-on-dark);
-            padding: 15px 35px;
-            border-radius: 4px; /* Standard Material Design button border-radius */
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-            box-shadow: var(--md-shadow-1dp); /* Initial button elevation */
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background-color: #43A047; /* Slightly darker green on hover */
-            box-shadow: var(--md-shadow-2dp); /* Lift on hover */
-            transform: translateY(-2px);
-        }
-
-        .cta-button:active {
-            background-color: #388E3C; /* Even darker on click */
-            box-shadow: var(--md-shadow-1dp); /* Press down effect */
-            transform: translateY(0);
-        }
-
-        .cta-button .material-icons {
-            margin-left: 8px;
-            font-size: 1.2em;
-        }
-
-        /* Grid Layouts */
-        .features-grid, .use-cases-grid, .future-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        /* Material Design Card for Feature/Use Case Items */
-        .feature-item, .use-case-item, .future-item {
-            background-color: var(--md-surface-color);
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: var(--md-shadow-1dp); /* Card elevation */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .feature-item:hover, .use-case-item:hover, .future-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--md-shadow-2dp); /* Lift on hover */
-        }
-
-        .feature-item .material-icons, .use-case-item .material-icons {
-            font-size: 3.5em; /* Larger icons */
-            color: var(--md-primary-color);
-            margin-bottom: 15px;
-        }
-
-        .feature-item h3, .use-case-item h3, .future-item h3 {
-            color: var(--md-primary-dark);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .feature-item p, .use-case-item p, .future-item p {
-            font-size: 1em;
-            color: #555;
-            flex-grow: 1; /* Allows text to take up available space */
-        }
-
-        .image-container, .video-container {
-            width: 100%;
-            height: 400px; /* Consistent height for visual elements */
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            background-color: #ccc; /* Placeholder background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #666;
-            font-style: italic;
-            text-align: center;
-            box-shadow: var(--md-shadow-1dp);
-        }
-
-        .image-container img, .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block; /* Remove extra space below image */
-        }
-
-        .image-placeholder, .video-placeholder {
-            padding: 20px;
-        }
-
-        /* Specific styling for use case images within cards */
-        .use-case-item .image-container {
-            height: 180px; /* Smaller height for images within use case cards */
-            margin-top: 15px;
-            margin-bottom: 0; /* No bottom margin within the card */
-        }
-
-        /* Testimonials/Clients Section */
-        .testimonials {
-            text-align: center;
-            padding: 40px 0;
-            background-color: var(--md-background-dark); /* Slightly darker background */
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* Inner shadow for separation */
-        }
-
-        .testimonial-item {
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-            font-style: italic;
-            font-size: 1.1em;
-            color: #555;
-            padding: 20px;
-            background-color: var(--md-surface-color);
-            border-radius: 8px;
-            box-shadow: var(--md-shadow-1dp);
-        }
-
-        .testimonial-item cite {
-            display: block;
-            margin-top: 15px;
+        /* Custom styles for Material Icons, as Tailwind doesn't directly style icon fonts */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
             font-style: normal;
-            font-weight: 500;
-            color: var(--md-primary-dark);
-            font-size: 1em;
+            font-size: 24px; /* Default size, overridden by Tailwind text-size classes */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'liga';
         }
 
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-            padding: 50px;
-            background-color: var(--md-primary-color);
-            color: var(--md-text-on-dark);
-            border-radius: 8px;
-            box-shadow: var(--md-shadow-2dp);
+        /* Base body padding for sticky header */
+        body {
+            padding-top: 130px; /* Default for mobile */
         }
 
-        .contact-section h2 {
-            color: var(--md-text-on-dark);
-            margin-bottom: 25px;
-        }
-
-        .contact-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .contact-section a {
-            color: var(--md-text-on-dark);
-            text-decoration: underline;
-            font-weight: 500;
-        }
-
-        footer {
-            background-color: var(--md-primary-dark);
-            color: var(--md-text-on-dark);
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            font-size: 0.9em;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Responsive Design Adjustments */
-
-        /* For screens wider than 480px (e.g., tablets and larger phones) */
+        /* Responsive padding-top for body */
         @media (min-width: 481px) {
-            .container {
-                padding: 0 20px; /* Restore original padding for larger screens */
-            }
             body {
-                padding-top: 100px; /* Adjusted padding-top for slightly larger header */
-            }
-            header .logo-container {
-                margin-bottom: 0; /* No margin on larger screens */
+                padding-top: 100px;
             }
         }
-
-        /* For screens wider than 769px (common desktop breakpoint) */
         @media (min-width: 769px) {
-            header {
-                flex-direction: row; /* Align logo/tagline and nav horizontally on desktop */
-                justify-content: space-between; /* Space out logo/tagline and nav */
-                padding: 10px 40px; /* More padding on sides for desktop */
-            }
-            header.header-scrolled {
-                padding: 5px 40px; /* Smaller padding when scrolled on desktop */
-            }
-            header .logo-container {
-                flex-direction: row; /* Align logo and tagline horizontally */
-                gap: 15px; /* Space between logo and tagline */
-            }
-            header .logo {
-                width: 100px; /* Smaller logo on desktop */
-                margin-bottom: 0;
-            }
-            header.header-scrolled .logo {
-                width: 80px; /* Even smaller logo when scrolled */
-            }
-            header p {
-                font-size: 0.8em; /* Smaller tagline on desktop */
-                margin-top: 0;
-            }
-            header.header-scrolled p {
-                font-size: 0.7em; /* Even smaller tagline when scrolled */
-            }
-            nav {
-                width: auto; /* Allow nav to take natural width */
-            }
-            nav ul {
-                gap: 25px; /* More space between nav items on desktop */
-            }
             body {
-                padding-top: 80px; /* Adjust body padding for smaller sticky header */
-            }
-        }
-
-        /* For very small screens (e.g., older phones) */
-        @media (max-width: 480px) {
-            .hero-section h1 {
-                font-size: 2.2em; /* Smaller hero heading */
-            }
-            .hero-section p {
-                font-size: 1em; /* Smaller hero text */
-            }
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 1em;
-            }
-            .image-container, .video-container {
-                height: 250px; /* Smaller image/video containers */
-            }
-            section {
-                padding: 20px; /* Reduce section padding */
-            }
-            body {
-                padding-top: 130px; /* Maintain padding for smallest screens */
+                padding-top: 80px;
             }
         }
     </style>
 </head>
-<body>
+<body class="font-inter text-text-dark leading-relaxed bg-bg-light overflow-x-hidden">
 
-    <header>
-        <div class="logo-container">
+    <header class="bg-surface-white text-text-dark p-4 text-center shadow-md-2 flex flex-col items-center justify-center sticky top-0 z-50 w-full transition-all duration-300 ease-in-out">
+        <div class="flex flex-col items-center mb-2 md:flex-row md:mb-0 md:gap-4">
             <!-- Biztrax Logo -->
-            <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="logo">
-            <p>Cutting-Edge IT Consultancy & Autonomous Solutions</p>
+            <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="w-32 h-auto rounded-md transition-all duration-300 ease-in-out md:w-24">
+            <p class="text-primary-blue text-sm opacity-90 mt-1 md:mt-0 md:text-xs transition-all duration-300 ease-in-out">Cutting-Edge IT Consultancy & Autonomous Solutions</p>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#use-cases">Use Cases</a></li>
-                <li><a href="#future-plans">Future Plans</a></li>
-                <li><a href="#contact">Contact</a></li>
+        <nav class="w-full text-center mt-2">
+            <ul class="list-none p-0 m-0 flex flex-wrap justify-center gap-4">
+                <li><a href="#overview" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Overview</a></li>
+                <li><a href="#features" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Features</a></li>
+                <li><a href="#use-cases" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Use Cases</a></li>
+                <li><a href="#future-plans" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Future Plans</a></li>
+                <li><a href="#contact" class="block text-text-dark font-medium px-3 py-2 rounded-md hover:bg-gray-100 hover:text-primary-blue transition-colors duration-300">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <section class="hero-section">
-            <h1>Introducing the Biztrax AI Drone System</h1>
-            <p>Your ultimate autonomous aerial solution for intelligent, hands-free operations in security, surveillance, inspection, and more.</p>
-            <a href="#contact" class="cta-button">
+    <main class="container max-w-6xl mx-auto my-8 px-4 md:px-6">
+        <section class="hero-section flex flex-col items-center text-center bg-gradient-to-r from-primary-blue to-light-blue text-white p-16 rounded-lg shadow-md-4 mb-8">
+            <h1 class="text-5xl font-bold font-montserrat mb-4 lg:text-6xl">Introducing the Biztrax AI Drone System</h1>
+            <p class="text-xl max-w-3xl mb-8 font-light lg:text-2xl">Your ultimate autonomous aerial solution for intelligent, hands-free operations in security, surveillance, inspection, and more.</p>
+            <a href="#contact" class="cta-button inline-flex items-center justify-center bg-accent-green text-white px-8 py-4 rounded-md font-semibold text-lg shadow-md-1 hover:bg-green-600 hover:shadow-md-2 transform hover:-translate-y-0.5 transition-all duration-300">
                 Transform Your Operations Today
-                <span class="material-icons">arrow_forward</span>
+                <span class="material-icons ml-2 text-xl">arrow_forward</span>
             </a>
         </section>
 
-        <section id="overview">
-            <h2>System Overview</h2>
-            <div class="image-container">
+        <section id="overview" class="bg-surface-white p-10 mb-8 rounded-lg shadow-md-1 hover:shadow-md-2 transition-shadow duration-300">
+            <h2 class="font-montserrat text-dark-blue text-4xl font-bold text-center mb-8">System Overview</h2>
+            <div class="image-container w-full h-96 overflow-hidden rounded-lg mb-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                 <!-- AI Image: A sleek, futuristic drone with multiple propellers flying autonomously over a city skyline at dawn, with subtle glowing AI elements. -->
-                <img src="AI_Drone_Skyline_Dawn.webp" alt="AI Drone System Flying Over City" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+System+Image';">
+                <img src="AI_Drone_Skyline_Dawn.webp" alt="AI Drone System Flying Over City" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+System+Image';">
                 <!-- Prompt for image generation if not provided: "Generate a realistic, high-resolution image of a sleek, futuristic autonomous drone with subtle glowing AI indicators, flying gracefully over a modern city skyline at dawn. The drone should look advanced and capable, perhaps with a camera lens visible." -->
             </div>
-            <p>The Biztrax AI Drone System is a fully autonomous aerial platform designed for intelligent, hands-free operation. It conducts missions without human intervention and features a self-charging mechanism using a custom-built landing box. When the battery is low, the drone automatically lands, recharges, and prepares for its next mission. This system pushes the boundaries of autonomous technology, offering significant potential across public safety, defense, logistics, and environmental monitoring.</p>
-            <div class="video-container">
+            <p class="text-lg text-gray-700">The Biztrax AI Drone System is a fully autonomous aerial platform designed for intelligent, hands-free operation. It conducts missions without human intervention and features a self-charging mechanism using a custom-built landing box. When the battery is low, the drone automatically lands, recharges, and prepares for its next mission. This system pushes the boundaries of autonomous technology, offering significant potential across public safety, defense, logistics, and environmental monitoring.</p>
+            <div class="video-container w-full h-96 overflow-hidden rounded-lg mt-6 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                 <!-- AI Video: A short clip showing the AI Drone autonomously landing into its charging station, then taking off again. Focus on the precision and automation. -->
-                <video controls autoplay muted loop>
+                <video controls autoplay muted loop class="w-full h-full object-cover block">
                     <source src="AI_Drone_Charging_Takeoff.mp4" type="video/mp4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+Charging+Video+Unavailable';">
                     Your browser does not support the video tag.<br>
                 </video>
@@ -495,146 +127,146 @@
             </div>
         </section>
 
-        <section id="features">
-            <h2>Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <span class="material-icons">flight_takeoff</span>
-                    <h3>Auto Take-off & Landing</h3>
-                    <p>Effortless and precise automated take-off and landing sequences for seamless operation.</p>
+        <section id="features" class="bg-surface-white p-10 mb-8 rounded-lg shadow-md-1 hover:shadow-md-2 transition-shadow duration-300">
+            <h2 class="font-montserrat text-dark-blue text-4xl font-bold text-center mb-8">Key Features</h2>
+            <div class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">flight_takeoff</span>
+                    <h3 class="font-montserrat text-dark-blue text-2xl font-bold mb-2">Auto Take-off & Landing</h3>
+                    <p class="text-gray-700 text-base flex-grow">Effortless and precise automated take-off and landing sequences for seamless operation.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="material-icons">battery_charging_full</span>
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">battery_charging_full</span>
                     <h3>Autonomous Charging</h3>
-                    <p>The drone intelligently returns to its custom charging station for self-recharging, ensuring continuous readiness.</p>
+                    <p class="text-gray-700 text-base flex-grow">The drone intelligently returns to its custom charging station for self-recharging, ensuring continuous readiness.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="material-icons">web</span>
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">web</span>
                     <h3>Web-based Control Interface</h3>
-                    <p>Monitor and manage missions from anywhere in the world via an intuitive, globally accessible web interface.</p>
+                    <p class="text-gray-700 text-base flex-grow">Monitor and manage missions from anywhere in the world via an intuitive, globally accessible web interface.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="material-icons">map</span>
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">map</span>
                     <h3>Google Maps Integration</h3>
-                    <p>Advanced navigation and real-time mission monitoring powered by integrated Google Maps.</p>
+                    <p class="text-gray-700 text-base flex-grow">Advanced navigation and real-time mission monitoring powered by integrated Google Maps.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="material-icons">visibility_off</span>
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">visibility_off</span>
                     <h3>Obstacle Detection & Avoidance</h3>
-                    <p>Sophisticated sensors and AI ensure safe navigation by detecting and avoiding obstacles in real-time.</p>
+                    <p class="text-gray-700 text-base flex-grow">Sophisticated sensors and AI ensure safe navigation by detecting and avoiding obstacles in real-time.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="material-icons">camera_enhance</span>
+                <div class="feature-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">camera_enhance</span>
                     <h3>AI Object Recognition</h3>
-                    <p>Intelligent AI identifies and categorizes objects, including humans and vehicles, enhancing surveillance and data collection.</p>
+                    <p class="text-gray-700 text-base flex-grow">Intelligent AI identifies and categorizes objects, including humans and vehicles, enhancing surveillance and data collection.</p>
                 </div>
             </div>
         </section>
 
-        <section id="use-cases">
-            <h2>Transformative Use Cases</h2>
-            <div class="use-cases-grid">
-                <div class="use-case-item">
-                    <span class="material-icons">security</span>
+        <section id="use-cases" class="bg-surface-white p-10 mb-8 rounded-lg shadow-md-1 hover:shadow-md-2 transition-shadow duration-300">
+            <h2 class="font-montserrat text-dark-blue text-4xl font-bold text-center mb-8">Transformative Use Cases</h2>
+            <div class="use-cases-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">security</span>
                     <h3>Security & Surveillance</h3>
-                    <p>Automated patrolling and real-time monitoring for enhanced perimeter security and asset protection.</p>
-                    <div class="image-container" style="height: 180px;">
+                    <p class="text-gray-700 text-base flex-grow">Automated patrolling and real-time monitoring for enhanced perimeter security and asset protection.</p>
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                         <!-- AI Image: Drone hovering over a secure facility, showing a wide surveillance view. -->
-                        <img src="Drone_Security_Surveillance.webp" alt="Drone for Security" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Security+Drone+Image';">
+                        <img src="Drone_Security_Surveillance.webp" alt="Drone for Security" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Security+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of a drone with surveillance cameras hovering discreetly over a modern, secure industrial facility, showing a wide-angle view from the drone's perspective on a screen. Emphasize security and monitoring." -->
                     </div>
                 </div>
-                <div class="use-case-item">
-                    <span class="material-icons">forest</span>
+                <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">forest</span>
                     <h3>Wildlife Protection & Monitoring</h3>
-                    <p>Non-invasive observation and data collection for wildlife conservation and ecological research.</p>
-                    <div class="image-container" style="height: 180px;">
+                    <p class="text-gray-700 text-base flex-grow">Non-invasive observation and data collection for wildlife conservation and ecological research.</p>
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                         <!-- AI Image: Drone flying over a lush forest or wildlife reserve, observing animals from above. -->
-                        <img src="Drone_Wildlife_Monitoring.webp" alt="Drone for Wildlife" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Wildlife+Drone+Image';">
+                        <img src="Drone_Wildlife_Monitoring.webp" alt="Drone for Wildlife" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Wildlife+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone flying over a vibrant, dense forest or wildlife reserve, subtly observing a group of animals (e.g., elephants, deer) from above. The scene should convey ecological monitoring and conservation." -->
                     </div>
                 </div>
-                <div class="use-case-item">
-                    <span class="material-icons">crisis_alert</span>
+                <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">crisis_alert</span>
                     <h3>Disaster Management & Search-and-Rescue</h3>
-                    <p>Rapid deployment for damage assessment, search operations, and critical information gathering in disaster zones.</p>
-                    <div class="image-container" style="height: 180px;">
+                    <p class="text-gray-700 text-base flex-grow">Rapid deployment for damage assessment, search operations, and critical information gathering in disaster zones.</p>
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                         <!-- AI Image: Drone flying through a disaster-stricken area, perhaps with emergency services vehicles below. -->
-                        <img src="Drone_Disaster_Rescue.webp" alt="Drone for Disaster Management" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Disaster+Drone+Image';">
+                        <img src="Drone_Disaster_Rescue.webp" alt="Drone for Disaster Management" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Disaster+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone flying low over a disaster-stricken area (e.g., flood, earthquake aftermath), with emergency response vehicles and personnel visible below. The drone should appear to be actively mapping or searching, conveying a sense of urgency and aid." -->
                     </div>
                 </div>
-                <div class="use-case-item">
-                    <span class="material-icons">construction</span>
+                <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">construction</span>
                     <h3>Infrastructure Inspection</h3>
-                    <p>Efficient and safe inspection of critical infrastructure like bridges, power lines, and pipelines.</p>
-                    <div class="image-container" style="height: 180px;">
+                    <p class="text-gray-700 text-base flex-grow">Efficient and safe inspection of critical infrastructure like bridges, power lines, and pipelines.</p>
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                         <!-- AI Image: Drone inspecting a large bridge or wind turbine up close. -->
-                        <img src="Drone_Infrastructure_Inspection.webp" alt="Drone for Infrastructure" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Infrastructure+Drone+Image';">
+                        <img src="Drone_Infrastructure_Inspection.webp" alt="Drone for Infrastructure" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Infrastructure+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone conducting a detailed inspection of a large infrastructure element, such as a bridge underbelly or a wind turbine blade. The drone should be in close proximity, highlighting precision inspection capabilities." -->
                     </div>
                 </div>
-                <div class="use-case-item">
-                    <span class="material-icons">gpp_good</span>
+                <div class="use-case-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">gpp_good</span>
                     <h3>Border Patrol</h3>
-                    <p>Autonomous monitoring of borders for enhanced security and early detection of unauthorized crossings.</p>
-                    <div class="image-container" style="height: 180px;">
+                    <p class="text-gray-700 text-base flex-grow">Autonomous monitoring of borders for enhanced security and early detection of unauthorized crossings.</p>
+                    <div class="image-container w-full h-48 overflow-hidden rounded-lg mt-4 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                         <!-- AI Image: Drone patrolling a remote border area. -->
-                        <img src="Drone_Border_Patrol.webp" alt="Drone for Border Patrol" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Border+Drone+Image';">
+                        <img src="Drone_Border_Patrol.webp" alt="Drone for Border Patrol" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x180/cccccc/333333?text=Border+Drone+Image';">
                         <!-- Prompt: "Generate a high-resolution image of an autonomous drone patrolling a remote, rugged border landscape, with subtle indications of a border fence or markers. The scene should convey long-range surveillance and security." -->
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="future-plans">
-            <h2>The Future of Autonomous Operations</h2>
-            <p class="text-center" style="text-align: center; font-size: 1.1em; color: #555; margin-bottom: 30px;">Our commitment to innovation means continuously enhancing the AI Drone System's capabilities:</p>
-            <div class="future-grid">
-                <div class="future-item">
-                    <span class="material-icons">swap_horiz</span>
+        <section id="future-plans" class="bg-surface-white p-10 mb-8 rounded-lg shadow-md-1 hover:shadow-md-2 transition-shadow duration-300">
+            <h2 class="font-montserrat text-dark-blue text-4xl font-bold text-center mb-8">The Future of Autonomous Operations</h2>
+            <p class="text-center text-lg text-gray-700 mb-8">Our commitment to innovation means continuously enhancing the AI Drone System's capabilities:</p>
+            <div class="future-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="future-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">swap_horiz</span>
                     <h3>Battery Swapping System</h3>
-                    <p>Achieving sub-30 second turnaround times for near-continuous mission readiness.</p>
+                    <p class="text-gray-700 text-base flex-grow">Achieving sub-30 second turnaround times for near-continuous mission readiness.</p>
                 </div>
-                <div class="future-item">
-                    <span class="material-icons">groups</span>
+                <div class="future-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">groups</span>
                     <h3>Swarm Drone Control</h3>
-                    <p>Enabling coordinated missions with multiple drones for expansive coverage and complex tasks.</p>
+                    <p class="text-gray-700 text-base flex-grow">Enabling coordinated missions with multiple drones for expansive coverage and complex tasks.</p>
                 </div>
-                <div class="future-item">
-                    <span class="material-icons">local_shipping</span>
+                <div class="future-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">local_shipping</span>
                     <h3>Logistics & Package Delivery</h3>
-                    <p>Future integration for efficient and rapid delivery services.</p>
+                    <p class="text-gray-700 text-base flex-grow">Future integration for efficient and rapid delivery services.</p>
                 </div>
-                <div class="future-item">
-                    <span class="material-icons">warehouse</span>
+                <div class="future-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">warehouse</span>
                     <h3>Warehouse Integration</h3>
-                    <p>Seamlessly connecting with inventory management systems for automated logistics.</p>
+                    <p class="text-gray-700 text-base flex-grow">Seamlessly connecting with inventory management systems for automated logistics.</p>
                 </div>
-                <div class="future-item">
-                    <span class="material-icons">explore_off</span>
+                <div class="future-item bg-gray-100 p-6 rounded-lg text-center shadow-md-1 hover:shadow-md-2 transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-start">
+                    <span class="material-icons text-primary-blue text-6xl mb-4">explore_off</span>
                     <h3>GPS-Denied Navigation</h3>
-                    <p>Developing advanced navigation for military and indoor environments where GPS is unavailable.</p>
+                    <p class="text-gray-700 text-base flex-grow">Developing advanced navigation for military and indoor environments where GPS is unavailable.</p>
                 </div>
             </div>
-            <div class="image-container" style="height: 300px; margin-top: 40px;">
+            <div class="image-container w-full h-72 overflow-hidden rounded-lg mt-10 bg-gray-300 flex items-center justify-center text-gray-600 italic shadow-md-1">
                 <!-- AI Image: Conceptual image of multiple drones flying in a coordinated swarm formation for a complex task. -->
-                <img src="Swarm_Drones_Future.webp" alt="Future of Drone Swarms" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/cccccc/333333?text=Drone+Swarm+Future+Image';">
+                <img src="Swarm_Drones_Future.webp" alt="Future of Drone Swarms" class="w-full h-full object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/cccccc/333333?text=Drone+Swarm+Future+Image';">
                 <!-- Prompt: "Generate a conceptual, high-resolution image of multiple advanced autonomous drones flying in a synchronized, coordinated swarm formation over a futuristic landscape or city. The image should convey teamwork and advanced AI capabilities, hinting at future applications like logistics or large-scale surveillance." -->
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
-            <h2>Ready to Innovate with Biztrax?</h2>
-            <p>Unlock the power of autonomous aerial systems for your business or organization. Contact us today to discuss how the Biztrax AI Drone System can revolutionize your operations.</p>
-            <a href="mailto:info@biztrax.uk" class="cta-button">
+        <section id="contact" class="contact-section text-center p-12 bg-primary-blue text-white rounded-lg shadow-md-2">
+            <h2 class="font-montserrat text-white text-4xl font-bold mb-6">Ready to Innovate with Biztrax?</h2>
+            <p class="text-xl mb-8 font-light">Unlock the power of autonomous aerial systems for your business or organization. Contact us today to discuss how the Biztrax AI Drone System can revolutionize your operations.</p>
+            <a href="mailto:info@biztrax.uk" class="cta-button inline-flex items-center justify-center bg-accent-green text-white px-8 py-4 rounded-md font-semibold text-lg shadow-md-1 hover:bg-green-600 hover:shadow-md-2 transform hover:-translate-y-0.5 transition-all duration-300">
                 Get in Touch
-                <span class="material-icons">email</span>
+                <span class="material-icons ml-2 text-xl">email</span>
             </a>
         </section>
     </main>
 
-    <footer>
+    <footer class="bg-dark-blue text-white text-center p-5 mt-10 text-sm shadow-inner">
         <p>&copy; 2025 Biztrax. All rights reserved.</p>
         <p>Part of Biztrax's commitment to cutting-edge IT Consultancy.</p>
     </footer>
