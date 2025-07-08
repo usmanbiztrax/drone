@@ -29,61 +29,113 @@
             --md-shadow-4dp: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
+        html, body {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
             color: var(--md-text-on-light);
             line-height: 1.6;
             background-color: var(--md-background-light);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            padding-top: 120px; /* Add padding to body to prevent content from being hidden behind sticky header */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            padding-top: 130px; /* Default padding for sticky header on small screens to accommodate logo + nav */
         }
 
-        /* Material Design Header */
+        /* Global box-sizing */
+        *, *::before, *::after {
+          box-sizing: inherit;
+        }
+
+        /* Material Design Header (App Bar) */
         header {
-            background-color: var(--md-surface-color); /* Changed to white background */
-            color: var(--md-text-on-light); /* Changed text color for visibility on white */
-            padding: 15px 20px;
+            background-color: var(--md-surface-color); /* White background */
+            color: var(--md-text-on-light); /* Text color for visibility on white */
+            padding: 10px 20px; /* Adjusted padding for header */
             text-align: center;
             box-shadow: var(--md-shadow-2dp); /* Material Design elevation */
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stack logo/tagline and nav vertically on small screens */
             align-items: center;
             justify-content: center;
             position: sticky; /* Make header sticky */
             top: 0; /* Stick to the top */
             z-index: 1000; /* Ensure it stays on top of other content */
             width: 100%; /* Ensure it spans full width */
+            transition: padding 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for header changes */
+        }
+
+        header.header-scrolled {
+            padding: 5px 20px; /* Smaller padding when scrolled */
+            box-shadow: var(--md-shadow-4dp); /* More prominent shadow when scrolled */
+        }
+
+        header .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px; /* Space between logo/tagline and nav on mobile */
         }
 
         header .logo {
-            width: 150px; /* Adjust logo size as needed */
+            width: 120px; /* Default logo size */
             height: auto;
-            margin-bottom: 10px;
             border-radius: 4px; /* Slight rounding for the logo container if it's a square image */
+            transition: width 0.3s ease; /* Smooth transition for logo size */
         }
 
-        header h1 {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2em;
-            font-weight: 700;
+        header.header-scrolled .logo {
+            width: 100px; /* Smaller logo when scrolled */
         }
 
         header p {
-            font-size: 1em;
+            font-size: 0.9em; /* Default tagline font size */
             opacity: 0.9;
             margin-top: 5px;
-            color: var(--md-primary-color); /* Changed text color to Biztrax logo blue */
+            color: var(--md-primary-color); /* Tagline color to Biztrax logo blue */
+            transition: font-size 0.3s ease; /* Smooth transition for tagline size */
+        }
+
+        header.header-scrolled p {
+            font-size: 0.8em; /* Smaller tagline when scrolled */
+        }
+
+        /* Navigation Styling */
+        nav {
+            width: 100%;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            justify-content: center;
+            gap: 15px; /* Space between nav items */
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--md-text-on-light);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block; /* Make the whole area clickable */
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(0, 0, 0, 0.08); /* Material Design hover effect */
+            color: var(--md-primary-color);
         }
 
         .container {
             max-width: 1200px;
             margin: 30px auto;
-            padding: 0 20px;
+            padding: 0 10px; /* Default padding for container on small screens */
         }
 
         /* Material Design Card Styling for Sections */
@@ -318,50 +370,80 @@
             box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.8em;
-            }
-            .hero-section p {
-                font-size: 1.2em;
-            }
-            header h1 {
-                font-size: 1.8em;
-            }
-            h2 {
-                font-size: 2em;
-            }
-            .features-grid, .use-cases-grid, .future-grid {
-                grid-template-columns: 1fr;
-            }
-            section {
-                padding: 25px;
-            }
-            .image-container, .video-container {
-                height: 300px;
+        /* Responsive Design Adjustments */
+
+        /* For screens wider than 480px (e.g., tablets and larger phones) */
+        @media (min-width: 481px) {
+            .container {
+                padding: 0 20px; /* Restore original padding for larger screens */
             }
             body {
-                padding-top: 100px; /* Adjust padding for smaller screens */
+                padding-top: 100px; /* Adjusted padding-top for slightly larger header */
+            }
+            header .logo-container {
+                margin-bottom: 0; /* No margin on larger screens */
             }
         }
 
+        /* For screens wider than 769px (common desktop breakpoint) */
+        @media (min-width: 769px) {
+            header {
+                flex-direction: row; /* Align logo/tagline and nav horizontally on desktop */
+                justify-content: space-between; /* Space out logo/tagline and nav */
+                padding: 10px 40px; /* More padding on sides for desktop */
+            }
+            header.header-scrolled {
+                padding: 5px 40px; /* Smaller padding when scrolled on desktop */
+            }
+            header .logo-container {
+                flex-direction: row; /* Align logo and tagline horizontally */
+                gap: 15px; /* Space between logo and tagline */
+            }
+            header .logo {
+                width: 100px; /* Smaller logo on desktop */
+                margin-bottom: 0;
+            }
+            header.header-scrolled .logo {
+                width: 80px; /* Even smaller logo when scrolled */
+            }
+            header p {
+                font-size: 0.8em; /* Smaller tagline on desktop */
+                margin-top: 0;
+            }
+            header.header-scrolled p {
+                font-size: 0.7em; /* Even smaller tagline when scrolled */
+            }
+            nav {
+                width: auto; /* Allow nav to take natural width */
+            }
+            nav ul {
+                gap: 25px; /* More space between nav items on desktop */
+            }
+            body {
+                padding-top: 80px; /* Adjust body padding for smaller sticky header */
+            }
+        }
+
+        /* For very small screens (e.g., older phones) */
         @media (max-width: 480px) {
             .hero-section h1 {
-                font-size: 2em;
+                font-size: 2.2em; /* Smaller hero heading */
             }
             .hero-section p {
-                font-size: 1em;
+                font-size: 1em; /* Smaller hero text */
             }
             .cta-button {
                 padding: 12px 25px;
                 font-size: 1em;
             }
             .image-container, .video-container {
-                height: 250px;
+                height: 250px; /* Smaller image/video containers */
+            }
+            section {
+                padding: 20px; /* Reduce section padding */
             }
             body {
-                padding-top: 90px; /* Adjust padding for smallest screens */
+                padding-top: 130px; /* Maintain padding for smallest screens */
             }
         }
     </style>
@@ -369,10 +451,20 @@
 <body>
 
     <header>
-        <!-- Biztrax Logo -->
-        <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="logo">
-        <!-- Removed <h1>Biztrax</h1> -->
-        <p>Cutting-Edge IT Consultancy & Autonomous Solutions</p>
+        <div class="logo-container">
+            <!-- Biztrax Logo -->
+            <img src="https://lh4.googleusercontent.com/6icR2e57lsiXIUFR_wpa799fadMW0HNlQa0myQRNebtJBVzbmOS6nHStC3aPsGceHtqWnLUXfx5k0WHN6lx3bh9jzSA4I9mIcLz465d1ZFt8Vk89p4ZrERKjRG6so8Eb7RuQwK8KwUU=w16383" alt="Biztrax Logo" class="logo">
+            <p>Cutting-Edge IT Consultancy & Autonomous Solutions</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#future-plans">Future Plans</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main class="container">
@@ -397,7 +489,7 @@
                 <!-- AI Video: A short clip showing the AI Drone autonomously landing into its charging station, then taking off again. Focus on the precision and automation. -->
                 <video controls autoplay muted loop>
                     <source src="AI_Drone_Charging_Takeoff.mp4" type="video/mp4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=AI+Drone+Charging+Video+Unavailable';">
-                    Your browser does not support the video tag.
+                    Your browser does not support the video tag.<br>
                 </video>
                 <!-- Prompt for video generation if not provided: "Generate a 15-20 second video showcasing an autonomous drone performing an accurate, smooth landing into a sleek, futuristic charging station. After a brief charging animation, show the drone seamlessly taking off again, demonstrating its hands-free operation and rapid deployment capability." -->
             </div>
@@ -594,6 +686,16 @@
             section.style.transform = 'translateY(20px)';
             section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
             observer.observe(section);
+        });
+
+        // Header scroll effect (Material Design elevation and size change)
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 0) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
         });
     </script>
 
